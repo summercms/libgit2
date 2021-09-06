@@ -16,6 +16,7 @@
 #include "git2/commit.h"
 #include "git2/tree.h"
 
+#include "checkout.h"
 #include "remote.h"
 #include "futils.h"
 #include "refs.h"
@@ -367,7 +368,7 @@ static bool should_checkout(
 	if (!opts)
 		return false;
 
-	if (opts->checkout_strategy == GIT_CHECKOUT_NONE)
+	if (opts->checkout_strategy == GIT_CHECKOUT__HARD_STOP)
 		return false;
 
 	return !git_repository_head_unborn(repo);

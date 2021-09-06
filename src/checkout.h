@@ -12,7 +12,16 @@
 #include "git2/checkout.h"
 #include "iterator.h"
 
-#define GIT_CHECKOUT__NOTIFY_CONFLICT_TREE (1u << 12)
+/**
+ * Do not do a checkout and do not fire callbacks; this is useful
+ * for internal functions that will perform the checkout themselves
+ * but need to pass checkout options into another function, for
+ * example, `git_clone`.
+ *
+ * This is defined as `GIT_CHECKOUT_RESERVED` in the public API to
+ * ensure that we do not accidentally re-use it.
+ */
+#define GIT_CHECKOUT__HARD_STOP (1u << 31)
 
 /**
  * Update the working directory to match the target iterator.  The
